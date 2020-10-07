@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Luis_Practica.Models;
+using Luis_P1_AP2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

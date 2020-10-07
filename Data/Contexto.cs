@@ -14,6 +14,6 @@ namespace Luis_P1_AP2.Data
             optionsBuilder.UseSqlite(@"Data source = Data\\Registro.db");
 
         }
-        
+        public DbSet<Producto> producto {get;set;}
     }
 }

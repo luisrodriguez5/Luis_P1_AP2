@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Luis_P1_AP2.Data;
-
+using Blazored.Toast;
 namespace Luis_P1_AP2
 {
     public class Startup
@@ -27,6 +27,7 @@ namespace Luis_P1_AP2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddBlazoredToast();
             services.AddServerSideBlazor();
             
         }

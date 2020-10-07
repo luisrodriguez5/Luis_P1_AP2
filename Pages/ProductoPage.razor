@@ -1,0 +1,62 @@
+@page "/Producto"
+@inject IToastService Toast
+@code{
+    Producto producto = new Producto();
+
+    //[Parameter] public int #Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+    }
+
+    private void Nuevo()
+    {
+        producto = new Producto();
+    }
+
+    private void Guardar()
+    {
+        bool guardado;
+
+        guardado = ProductoBLL.Guardar(producto);
+
+        if (guardado)
+        {
+            Nuevo();
+            Toast.ShowSuccess("Se ha Guardado Exitosamente");
+        }
+        else
+            Toast.ShowError("Error, no se pudo Guardar");
+    }
+
+    private void Buscar()
+    {
+         if (producto.ProductoId > 0)
+         {
+             var encontrado = ProductoBLL.Buscar(producto.ProductoId);
+             if (encontrado != null)
+             {
+                 producto = encontrado;
+				 Toast.ShowSuccess("Se ha Enconrado el producto");
+			 }
+             else
+                 Toast.ShowWarning("No se pudo localizar la Persona indicada");
+         }       
+    }
+
+    private void Eliminar()
+    {
+        bool elimino;
+
+        elimino = ProductoBLL.Eliminar(producto.ProductoId);
+
+        if (elimino)
+        {
+            Nuevo();
+            Toast.ShowSuccess("Se ha Eliminado Exitosamente");
+        }
+        else
+            Toast.ShowError("No se pudo localizar la Persona indicada");     
+    }
+}

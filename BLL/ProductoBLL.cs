@@ -1,9 +1,12 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Luis_P1_AP2.Models;
 using Luis_P1_AP2.Data;
+using Luis_P1_AP2.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 namespace Luis_P1_AP2.BLL
 {
     public class ProductoBLL
@@ -124,6 +127,27 @@ namespace Luis_P1_AP2.BLL
                 contexto.Dispose();
             }
             return producto;
+        }
+
+        public static List<Producto> GetList(Expression<Func<Producto, bool>> expression)
+        {
+            List<Producto> lista = new List<Producto>();
+            Contexto contexto = new Contexto();
+
+            try
+            {
+                lista = contexto.producto.Where(expression).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return lista;
         }
     }
 }

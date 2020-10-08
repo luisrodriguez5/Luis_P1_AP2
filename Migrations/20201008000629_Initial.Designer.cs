@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Luis_P1_AP2.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20201007230149_Initial")]
+    [Migration("20201008000629_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,15 +23,17 @@ namespace Luis_P1_AP2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Costo")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("Costo")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Existencia")
-                        .IsRequired()
+                    b.Property<decimal>("Existencia")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("valorInventario")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ProductoId");

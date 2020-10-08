@@ -1,5 +1,68 @@
 @page "/Producto"
 @inject IToastService Toast
+
+<EditForm Model="producto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator/>  
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Registro de Productos</h3>
+            </div>
+
+            <div class="card-body">
+                <form>
+                    <div class="form-row align-items-center">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>ID:</label>
+                                <div class="input-group">
+                                    <InputNumber @bind-Value="producto.ProductoId" class="form-control col-4" />
+                                    <ValidationMessage For="(() => producto.ProductoId)"></ValidationMessage>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-primary input-group-text" @onclick="Buscar">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripcion:</label>
+                        <InputText @bind-Value="producto.Descripcion" class="form-control col-5" />
+                        <ValidationMessage For="@(() => producto.Descripcion)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Existencia:</label>
+                        <InputNumber @bind-Value="producto.Existencia" @onclick="CalcularValorInventario" class="form-control col-5" />
+                        <ValidationMessage For="@(() => producto.Existencia)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Costo:</label>
+                        <InputNumber @bind-Value="producto.Costo" @onclick="CalcularValorInventario" class="form-control col-5" />
+                        <ValidationMessage For="@(() => producto.Costo)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Valor inventario:</label>
+                        <InputNumber @bind-Value="producto.valorInventario" class="form-control col-5" readonly="flase" />
+                        <ValidationMessage For="@(() => producto.valorInventario)" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-group text-center" display: inline-block>
+                    <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo">Nuevo</button>
+                    <button type="submit" class="btn btn-lg btn-success">Guardar</button>
+                    <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">Eliminar</button>
+                </div>
+            </div>
+
+        </div>
+</EditForm>
+
 @code{
     Producto producto = new Producto();
 
@@ -41,8 +104,15 @@
 				 Toast.ShowSuccess("Se ha Enconrado el producto");
 			 }
              else
-                 Toast.ShowWarning("No se pudo localizar la Persona indicada");
+                 Toast.ShowWarning("No se pudo El Producto indicada");
          }       
+    }
+
+    
+    private void CalcularValorInventario()
+    {
+        decimal calculo = (producto.Existencia*producto.Costo);
+        producto.valorInventario = calculo;
     }
 
     private void Eliminar()

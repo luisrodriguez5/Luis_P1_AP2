@@ -21,15 +21,17 @@ namespace Luis_P1_AP2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Costo")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("Costo")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Existencia")
-                        .IsRequired()
+                    b.Property<decimal>("Existencia")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("valorInventario")
                         .HasColumnType("TEXT");
 
                     b.HasKey("ProductoId");

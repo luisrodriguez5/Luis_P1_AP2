@@ -10,9 +10,14 @@ namespace Luis_P1_AP2.Models
         [Required(ErrorMessage="La Descripicion es requerida")]
         public string Descripcion { get; set; }
         [Required(ErrorMessage="La Existencia es requerida")]
-        public string Existencia { get; set; }
+        public decimal Existencia { get; set; }
+
         [Required(ErrorMessage="El Costo requerido")]
-        public int Costo { get; set; }
+        [Range(1, 1000000, ErrorMessage = "El rango es de 1 a 100000")]
+        public decimal Costo { get; set; }
+
+        [Required(ErrorMessage = "Este campo no puede estar vacio.")]
+        public decimal valorInventario { get; set; }
         
     }
 }
